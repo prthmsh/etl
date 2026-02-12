@@ -1,0 +1,46 @@
+mysql:
+  host: localhost
+  port: 3306
+  database: etl_db
+  user: ${MYSQL_USER}
+  password: ${MYSQL_PASSWORD}
+
+ftp_servers:
+  # Example FTP server configuration
+  - name: sales_server
+    type: ftp          # 'ftp' or 'sftp'
+    host: ftp.example.com
+    port: 21
+    user: ${FTP_USER1}
+    password: ${FTP_PASS1}
+    file_path: /data/sales_2023.csv
+    csv_params:
+      delimiter: ','
+      encoding: utf-8
+      header: 0
+
+  # Example SFTP server configuration
+  - name: orders_sftp
+    type: sftp
+    host: sftp.example.org
+    port: 22
+    user: ${SFTP_USER}
+    password: ${SFTP_PASS}
+    key_filename: ~/.ssh/id_rsa   # optional SSH key, can be None
+    file_path: /uploads/orders.csv
+    csv_params:
+      delimiter: ';'
+      encoding: latin1
+      header: 0
+
+  # Add more servers as needed
+  # - name: another_server
+  #   type: ftp
+  #   host: ftp2.example.com
+  #   port: 21
+  #   user: ${FTP_USER2}
+  #   password: ${FTP_PASS2}
+  #   file_path: /reports/data.csv
+  #   csv_params:
+  #     delimiter: ','
+  #     encoding: utf-8
